@@ -57,23 +57,19 @@ function createKeyboard(keyboard) {
         buttons[i].forEach(element => {
             const button = document.createElement("button");
             button.innerHTML = element
-            if (element == "ENTER") {
-                button.id = "enterButton"
-                row.append(button)
-            } else {
-                button.addEventListener("click", (event) => {
-                    if (event.target.innerHTML == "ENTER") {
-                        
-                    } else if (event.target.innerHTML == "←") {
-                        state.guess = state.guess.slice(0, state.guess.length - 1)
-                        removeLetter(state.guess.length)
-                    } else {
-                        addLetter(event.target.innerHTML, state.guess.length);
-                    }
-                    // console.log(event)
-                });
-                row.append(button)
-            }
+            button.id = element
+            button.addEventListener("click", (event) => {
+                if (event.target.innerHTML == "ENTER") {
+                    
+                } else if (event.target.innerHTML == "←") {
+                    state.guess = state.guess.slice(0, state.guess.length - 1)
+                    removeLetter(state.guess.length)
+                } else {
+                    addLetter(event.target.innerHTML, state.guess.length);
+                }
+                // console.log(event)
+            });
+            row.append(button)
         });
         container.append(row)   
     }
@@ -277,17 +273,20 @@ function showResult(result) {
     };
 
     for (let index = 0; index < result.length; index++) {
-        const cellToChange = document.querySelector(`.${rLookUp[state.score]}${index}`);
+        
         // console.log(result[index])
         switch (result[index]) {
             case 1:
-                cellToChange.className = `${rLookUp[state.score]}${index} correct`
+                // correct
+                setBackground(index, "correct");
                 break
             case 0:
-                cellToChange.className = `${rLookUp[state.score]}${index} misplaced`
+                // misplaced
+                setBackground(index, "misplaced")
                 break
             case -1:
-                cellToChange.className = `${rLookUp[state.score]}${index} incorrect`
+                // incorrect
+                setBackground(index, "incorrect")
                 break
             default:
                 break
@@ -296,6 +295,14 @@ function showResult(result) {
     
     state.score++;
     state.guess = "";
+}
+
+function setBackground(index, className) {
+    const cellToChange = document.querySelector(`.${rLookUp[state.score]}${index}`);
+    cellToChange.className = `${rLookUp[state.score]}${index} ${className}`
+    const letter = cellToChange.innerHTML
+    const buttonToChange = document.getElementById(letter)
+    buttonToChange.className = className
 }
 
 export { createBoard, createKeyboard, listenForLetters, showResult, rLookUp, state }

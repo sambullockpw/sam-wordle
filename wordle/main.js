@@ -57,7 +57,7 @@ function sendGuesses(board, websocket) {
             default:
         }
     });
-    const enterButton = document.getElementById("enterButton")
+    const enterButton = document.getElementById("ENTER")
     enterButton.addEventListener("click", () => {
         // Send event
         const guess = {
