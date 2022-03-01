@@ -44,6 +44,47 @@ function createBoard(board) {
     board.append(table)
 }
 
+function createKeyboard(keyboard) {
+    const buttons = [["Q","W","E","R","T","Y","U","I","O","P"],
+                    ["A","S","D","F","G","H","J","K","L"],
+                    ["ENTER","Z","X","C","V","B","N","M","←"]]
+
+    const container = document.createElement("div");
+    
+    for (let i = 0; i < 3; i++) {
+        const row = document.createElement("div");
+        row.className = "row"
+        buttons[i].forEach(element => {
+            const button = document.createElement("button");
+            button.innerHTML = element
+            if (element == "ENTER") {
+                button.id = "enterButton"
+                row.append(button)
+            } else {
+                button.addEventListener("click", (event) => {
+                    if (event.target.innerHTML == "ENTER") {
+                        
+                    } else if (event.target.innerHTML == "←") {
+                        state.guess = state.guess.slice(0, state.guess.length - 1)
+                        removeLetter(state.guess.length)
+                    } else {
+                        addLetter(event.target.innerHTML, state.guess.length);
+                    }
+                    // console.log(event)
+                });
+                row.append(button)
+            }
+        });
+        container.append(row)   
+    }
+
+    keyboard.append(container);
+    
+
+    
+
+}
+
 function listenForLetters(board) {
     window.addEventListener("keydown", (event) => {
         //console.log(event.key)
@@ -218,14 +259,14 @@ function addLetter(key, cell) {
         const cellToChange = document.querySelector(`.${rLookUp[state.score]}${cell}`);
         cellToChange.innerHTML = key
         state.guess += key.toLowerCase()
-        console.log(state.guess)
+        // console.log(state.guess)
     }
 }
 
 function removeLetter(cell) {
     const cellToChange = document.querySelector(`.${rLookUp[state.score]}${cell}`);
     cellToChange.innerHTML = null
-    console.log(state.guess)
+    // console.log(state.guess)
 }
 
 function showResult(result) {
@@ -237,7 +278,7 @@ function showResult(result) {
 
     for (let index = 0; index < result.length; index++) {
         const cellToChange = document.querySelector(`.${rLookUp[state.score]}${index}`);
-        console.log(result[index])
+        // console.log(result[index])
         switch (result[index]) {
             case 1:
                 cellToChange.className = `${rLookUp[state.score]}${index} correct`
@@ -257,4 +298,4 @@ function showResult(result) {
     state.guess = "";
 }
 
-export { createBoard, listenForLetters, showResult, rLookUp, state }
+export { createBoard, createKeyboard, listenForLetters, showResult, rLookUp, state }

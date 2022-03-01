@@ -1,9 +1,11 @@
-import { createBoard, listenForLetters, showResult, rLookUp, state } from "./wordle.js"
+import { createBoard, createKeyboard, listenForLetters, showResult, rLookUp, state } from "./wordle.js"
 
 window.addEventListener("DOMContentLoaded", () => {
     // Initialise the UI
     const board = document.querySelector(".board");
+    const keyboard = document.querySelector(".keyboard")
     createBoard(board)
+    createKeyboard(keyboard)
 
     const websocket = new WebSocket(getWebSocketServer());
     initGame(websocket);
@@ -46,7 +48,6 @@ function sendGuesses(board, websocket) {
         switch (event.key) {
             case "Enter":
                 // Send event
-                const result = null
                 const guess = {
                     "type": "guess",
                     "word": state.guess
@@ -55,7 +56,16 @@ function sendGuesses(board, websocket) {
                     break
             default:
         }
-    })
+    });
+    const enterButton = document.getElementById("enterButton")
+    enterButton.addEventListener("click", () => {
+        // Send event
+        const guess = {
+            "type": "guess",
+            "word": state.guess
+        };
+        websocket.send(JSON.stringify(guess))
+    });
 }
 
 function showMessage(message) {
