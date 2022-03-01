@@ -1,4 +1,4 @@
-import { createBoard, createKeyboard, listenForLetters, showResult, rLookUp, state } from "./wordle.js"
+import { createBoard, createKeyboard, listenForLetters, showResult, showSnackbar, rLookUp, state } from "./wordle.js"
 
 window.addEventListener("DOMContentLoaded", () => {
     // Initialise the UI
@@ -35,7 +35,7 @@ function receiveResults(board, websocket) {
                 showResult(result);
                 break
             case "error":
-                showMessage(event.message);
+                showSnackbar(event.message);
                 break
             default:
         }

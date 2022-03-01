@@ -20,7 +20,7 @@ const state = {
 }
 
 state.winner.registerListener(function(val) {
-    alert("You found todays word!");
+    showSnackbar("You found todays word!");
   });
 
 function createBoard(board) {
@@ -76,9 +76,6 @@ function createKeyboard(keyboard) {
 
     keyboard.append(container);
     
-
-    
-
 }
 
 function listenForLetters(board) {
@@ -305,4 +302,16 @@ function setBackground(index, className) {
     buttonToChange.className = className
 }
 
-export { createBoard, createKeyboard, listenForLetters, showResult, rLookUp, state }
+function showSnackbar(message) {
+    // Get the snackbar DIV
+    const snackbar = document.getElementById("snackbar");
+  
+    // Add the "show" class to DIV
+    snackbar.className = "show";
+    snackbar.innerHTML = message
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1000);
+}
+
+export { createBoard, createKeyboard, listenForLetters, showResult, showSnackbar, rLookUp, state }

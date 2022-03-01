@@ -1,4 +1,5 @@
 #1 fix bug in wordle game logic DONE
-#2 add lettering coloring to keyboard DONE
-#3 improve error messages using toasts
+#2 add button coloring to keyboard DONE
+#3 improve error messages using snackbar DONE
 #4 make page responsive
+#5 deploy to servers
