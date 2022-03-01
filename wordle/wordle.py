@@ -1,3 +1,4 @@
+from ast import For
 import twl
 from numpy.random import Generator, PCG64
 
@@ -62,7 +63,6 @@ class Wordle:
         iterator = 0
 
         for letter in bList:
-            
             if letter in aList:
                 if letter == aList[iterator]:
                     result.append(1)
@@ -74,9 +74,64 @@ class Wordle:
                 result.append(-1)
         return result
 
-    # Python code to convert string 
-    # to list character-wise
+    
+    def compare_strings_revB(self, a, b):
+        # a is the word_of_the_day
+        # b is word to check
+        aList = self.convert(a)
+        #aListToPop = aList
+        bList = self.convert(b)
+
+        # On first iteration check for only exact matches
+        result = []
+
+        for i in range(len(a)):
+            if aList[i] == bList[i]:
+                result.append(1)
+                aList[i] = None
+                bList[i] = None
+            else:
+                result.append(-1)
+
+        for i in range(len(bList)):
+            if bList[i] in aList:
+                if bList[i] == aList[i]:
+                    result[i] = 1
+                else:
+                    result[i] = 0
+
+
+        # now that we have found all the matches, check that
+        # any incorrect letters are not actually misplaced letters
+
+        # print(aList)
+        # print(bList)
+        return result
+
+
+    # converts strings to list of chars
     def convert(self, string):
         list1=[]
         list1[:0]=string
         return list1
+
+
+'''
+# Tests
+wordle = Wordle()
+
+if wordle.compare_strings_revB("yapon", "apple") == [0,-1,1,-1,-1]: #1
+    print("1: " + str(True))
+else:
+    print("1: " + str(False))
+
+if wordle.compare_strings_revB("yapon", "trace") == [-1,-1,0,-1,-1]: #2
+    print("2: " + str(True))
+else:
+    print("2: " + str(False))
+
+if wordle.compare_strings_revB("taste", "brush") == [-1,-1,-1,0,-1]: #3
+    print("3: " + str(True))
+else:
+    print("3: " + str(False))
+'''

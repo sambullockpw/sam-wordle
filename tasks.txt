@@ -1,0 +1,2 @@
+#1 fix bug in wordle game logic
+#2 add lettering coloring to keyboard
