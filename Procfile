@@ -1,1 +1,1 @@
-web: python connectfour/app.py
+web: python wordle/app.py
