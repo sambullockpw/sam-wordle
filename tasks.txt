@@ -4,3 +4,4 @@
 #4 make page responsive DONE
 #5 deploy to servers DONE
 #6 add winner modal w share button
+#7 make new heroku app to have 1 python 1 node app running
