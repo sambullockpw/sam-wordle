@@ -1,5 +1,6 @@
 #1 fix bug in wordle game logic DONE
 #2 add button coloring to keyboard DONE
 #3 improve error messages using snackbar DONE
-#4 make page responsive
+#4 make page responsive DONE
 #5 deploy to servers
+#6 add winner modal w share button

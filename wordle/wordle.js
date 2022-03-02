@@ -48,8 +48,6 @@ function createKeyboard(keyboard) {
     const buttons = [["Q","W","E","R","T","Y","U","I","O","P"],
                     ["A","S","D","F","G","H","J","K","L"],
                     ["ENTER","Z","X","C","V","B","N","M","←"]]
-
-    const container = document.createElement("div");
     
     for (let i = 0; i < 3; i++) {
         const row = document.createElement("div");
@@ -71,11 +69,8 @@ function createKeyboard(keyboard) {
             });
             row.append(button)
         });
-        container.append(row)   
-    }
-
-    keyboard.append(container);
-    
+        keyboard.append(row)   
+    }    
 }
 
 function listenForLetters(board) {
