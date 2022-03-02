@@ -1,0 +1,14 @@
+{
+  "name": "wordle",
+  "version": "1.0.0",
+  "description": "a 5 letter word guessing game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Bullock",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

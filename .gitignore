@@ -1,3 +1,4 @@
 env
-*/old
-*/__pycache__
+wordle/old
+wordle/__pycache__
+wordle/node_modules
